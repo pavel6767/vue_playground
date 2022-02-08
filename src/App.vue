@@ -1,34 +1,17 @@
 <template>
-  <h1>app</h1>
-  <button @click="start" :disabled="isPlaying">click to start</button>
-  <Block v-if="isPlaying" :delay="delay" @close="showResult" />
-  <Results v-if="!!result" :result="result" />
+  <h1>controlled form</h1>
+  <Form />
 </template>
 
 <script>
-import Block from "./components/Block.vue";
-import Results from "./components/Results.vue";
+import Form from "./components/Form.vue";
 export default {
   name: "App",
-  components: { Block, Results },
+  components: { Form },
   data() {
-    return {
-      isPlaying: false,
-      delay: null,
-      result: null,
-    };
+    return {};
   },
-  methods: {
-    start() {
-      this.delay = 2000 + Math.random() * 5000;
-      this.isPlaying = true;
-      this.result = null;
-    },
-    showResult(result) {
-      this.result = result;
-      this.isPlaying = false;
-    },
-  },
+  methods: {},
 };
 </script>
 
