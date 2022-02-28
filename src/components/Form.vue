@@ -1,4 +1,5 @@
 <template>
+  <h1>controlled form, {{ title }}</h1>
   <form @submit.prevent="handleSubmit">
     <label for="email">Email: </label>
     <input name="email" type="email" v-model="email" />
@@ -32,7 +33,7 @@
 <script>
 export default {
   name: "Form",
-  props: [],
+  props: ["title"],
   data() {
     return {
       email: "",

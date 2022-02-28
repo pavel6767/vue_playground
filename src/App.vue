@@ -1,17 +1,18 @@
 <template>
-  <h1>controlled form</h1>
-  <Form />
+  <router-link :to="{ name: 'Other', params: { title: 'other' } }"
+    >Other</router-link
+  >
+  <router-link :to="{ name: 'Form', params: { title: 'forma' } }"
+    >Form</router-link
+  >
+  <!-- <router-link :to="{ name: 'NotFound' }">NaN</router-link> -->
+
+  <router-view />
 </template>
 
 <script>
-import Form from "./components/Form.vue";
 export default {
   name: "App",
-  components: { Form },
-  data() {
-    return {};
-  },
-  methods: {},
 };
 </script>
 
@@ -23,5 +24,15 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+a {
+  color: white;
+  font-weight: bold;
+  background-color: indigo;
+  text-decoration: none;
+  margin: 15px;
+  padding: 5px 10px;
+  border-radius: 2px;
 }
 </style>
