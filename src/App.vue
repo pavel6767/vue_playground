@@ -1,18 +1,41 @@
 <template>
-  <router-link :to="{ name: 'Other', params: { title: 'other' } }"
-    >Other</router-link
-  >
-  <router-link :to="{ name: 'Form', params: { title: 'forma' } }"
-    >Form</router-link
-  >
-  <!-- <router-link :to="{ name: 'NotFound' }">NaN</router-link> -->
-
+  <Navigation />
+  
+  <button @click="redirect">redirect</button>
+  <button @click="back">back</button>
+  <button @click="forward">forward</button>
+  
   <router-view />
 </template>
 
 <script>
+import Navigation from './components/Navigation.vue'
+
 export default {
   name: "App",
+  components: {
+    Navigation
+  },
+  methods: {
+    redirect(){
+    },
+    back(){
+      this.$router.go(-1)
+    },
+    forward(){
+      this.$router.go(+1)
+
+    },
+    debug (event) {
+      console.log(event)
+    }
+  },
+  mounted() {
+    console.log('hi')
+  },
+  created() {
+    console.log('hi')
+  }
 };
 </script>
 

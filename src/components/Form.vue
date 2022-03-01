@@ -43,7 +43,9 @@ export default {
       skills: [],
     };
   },
-  mounted() {},
+  mounted() {
+
+  },
   methods: {
     addSkill(e) {
       const hasCommaOrSpace = e.key === "," || e.key === " ";
