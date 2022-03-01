@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-// import App from "./App.vue";
+
 import Form from "./components/Form.vue";
 import Other from "./components/Other.vue";
 import Home from "./components/Home.vue";
@@ -37,7 +37,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory('/'),
+  history: createWebHistory("/"),
   routes
 });
 

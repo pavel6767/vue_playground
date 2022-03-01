@@ -1,15 +1,15 @@
 <template>
   <Navigation />
-  
+
   <button @click="redirect">redirect</button>
   <button @click="back">back</button>
   <button @click="forward">forward</button>
-  
+
   <router-view />
 </template>
 
 <script>
-import Navigation from './components/Navigation.vue'
+import Navigation from "./components/Navigation.vue";
 
 export default {
   name: "App",
@@ -17,24 +17,22 @@ export default {
     Navigation
   },
   methods: {
-    redirect(){
+    redirect() {},
+    back() {
+      this.$router.go(-1);
     },
-    back(){
-      this.$router.go(-1)
+    forward() {
+      this.$router.go(+1);
     },
-    forward(){
-      this.$router.go(+1)
-
-    },
-    debug (event) {
-      console.log(event)
+    debug(event) {
+      console.log(event);
     }
   },
   mounted() {
-    console.log('hi')
+    console.log("hi");
   },
   created() {
-    console.log('hi')
+    console.log("hi");
   }
 };
 </script>

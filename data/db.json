@@ -1,0 +1,19 @@
+{
+  "jobs": [
+    {
+      "name": "UI dev",
+      "description": "dev of all things UI",
+      "id": "3"
+    },
+    {
+      "name": "UX designer",
+      "description": "designer of all things UX",
+      "id": "2"
+    },
+    {
+      "name": "Dev Dev",
+      "description": "dev of all things dev",
+      "id": "1"
+    }
+  ] 
+}

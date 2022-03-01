@@ -1,13 +1,12 @@
 <template>
-  <div>Other component, {{ title }}</div>
+    <div>Other component, {{ title }}</div>
 </template>
 
 <script>
 export default {
-  name: "Other",
-  props: ["title"],
+    name: "Other",
+    props: ["title"]
 };
 </script>
 
-<style>
-</style>
+<style></style>

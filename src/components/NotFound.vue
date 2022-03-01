@@ -1,12 +1,11 @@
 <template>
-  <div>Not Found</div>
+    <div>Not Found</div>
 </template>
 
 <script>
 export default {
-  name: "NotFound",
+    name: "NotFound"
 };
 </script>
 
-<style>
-</style>
+<style></style>
