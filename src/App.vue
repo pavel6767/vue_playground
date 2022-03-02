@@ -10,7 +10,6 @@
 
 <script>
 import Navigation from "./components/Navigation.vue";
-
 export default {
   name: "App",
   components: {
@@ -23,16 +22,7 @@ export default {
     },
     forward() {
       this.$router.go(+1);
-    },
-    debug(event) {
-      console.log(event);
     }
-  },
-  mounted() {
-    console.log("hi");
-  },
-  created() {
-    console.log("hi");
   }
 };
 </script>

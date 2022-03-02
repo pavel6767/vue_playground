@@ -13,7 +13,6 @@
 </template>
 
 <script>
-console.log("dsd");
 export default {
   name: "Home",
   data() {
