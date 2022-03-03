@@ -1,35 +1,55 @@
 <template>
   <div>Home</div>
   <div class="container">
-    <div v-if="!!loading">Loading...</div>
-    <div v-if="!loading">
-      <div v-if="!!error">{{ error }} error here</div>
-      <div v-if="!jobs.length && !error">No Results found</div>
-      <div v-for="job in jobs" :key="job.id">
-        {{ job.name }}: {{ job.description }}
-      </div>
-    </div>
+    <input type="text" v-model="searchQuery" />
+    <p>search query: {{ searchQuery }}</p>
+    <p @click="handleClick">My name is {{ state.name }}</p>
+    <p @click="handleReactive">My name is {{ s.name }}</p>
+    <p v-for="(name, inx) in filteredNames" :key="name">
+      {{ inx }} - {{ name }}
+    </p>
   </div>
 </template>
 
 <script>
+import { ref, reactive, computed } from "vue";
+
 export default {
   name: "Home",
-  data() {
-    return { jobs: [], error: "", loading: true };
-  },
-  mounted() {
-    fetch("http://localhost:3000/jobs")
-      .then((res) => res.json())
-      .then((res) => {
-        this.jobs = res;
-        this.loading = false;
-      })
-      .catch((err) => {
-        this.error = err.message;
-        this.loading = false;
-        return [];
-      });
+
+  setup() {
+    const searchQuery = ref("");
+    const names = ref(["now", "you", "are", "here", "hi", "there"]);
+    const state = ref({
+      name: "ko",
+      id: 0
+    });
+    const s = reactive({
+      name: "ko",
+      id: 0
+    });
+
+    const handleClick = () => {
+      state.value.name = "hi";
+    };
+    const handleReactive = () => {
+      s.name = "ractive";
+    };
+
+    const filteredNames = computed((e) => {
+      console.log({ e, searchQuery });
+      return names.value.filter((name) => name.includes(searchQuery.value));
+    });
+
+    return {
+      searchQuery,
+      state,
+      s,
+      filteredNames,
+      names,
+      handleClick,
+      handleReactive
+    };
   }
 };
 </script>
