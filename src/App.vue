@@ -46,4 +46,8 @@ a {
   padding: 5px 10px;
   border-radius: 2px;
 }
+
+.text--bold {
+  font-weight: bold;
+}
 </style>

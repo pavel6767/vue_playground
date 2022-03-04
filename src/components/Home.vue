@@ -1,57 +1,62 @@
 <template>
   <div>Home</div>
   <div class="container">
-    <input type="text" v-model="searchQuery" />
-    <p>search query: {{ searchQuery }}</p>
-    <p @click="handleClick">My name is {{ state.name }}</p>
-    <p @click="handleReactive">My name is {{ s.name }}</p>
-    <p v-for="(name, inx) in filteredNames" :key="name">
-      {{ inx }} - {{ name }}
-    </p>
+    <p v-if="!!loading">loading...</p>
+    <div v-else-if="!!posts.length">
+      <p v-if="!!error">{{ error }}</p>
+      <PostList :posts="posts" />
+    </div>
+    <p v-else>No Posts available</p>
   </div>
 </template>
 
 <script>
-import { ref, reactive, computed } from "vue";
+import { onMounted, ref } from "vue";
+
+import PostList from "./PostList.vue";
 
 export default {
   name: "Home",
-
+  components: { PostList },
   setup() {
-    const searchQuery = ref("");
-    const names = ref(["now", "you", "are", "here", "hi", "there"]);
-    const state = ref({
-      name: "ko",
-      id: 0
-    });
-    const s = reactive({
-      name: "ko",
-      id: 0
-    });
+    const loading = ref(true);
+    const error = ref("");
+    const posts = ref([]);
 
-    const handleClick = () => {
-      state.value.name = "hi";
-    };
-    const handleReactive = () => {
-      s.name = "ractive";
+    const loadPosts = async () => {
+      try {
+        const res = await fetch("http://localhost:3000/posts");
+
+        if (res.status !== 200) {
+          throw Error("failed to retrieve posts");
+        }
+        posts.value = await res.json();
+        error.value = "";
+      } catch (err) {
+        error.value = err.message;
+      }
     };
 
-    const filteredNames = computed((e) => {
-      console.log({ e, searchQuery });
-      return names.value.filter((name) => name.includes(searchQuery.value));
+    onMounted(async () => {
+      await loadPosts();
+      loading.value = false;
     });
 
     return {
-      searchQuery,
-      state,
-      s,
-      filteredNames,
-      names,
-      handleClick,
-      handleReactive
+      loading,
+      error,
+      posts
     };
   }
 };
 </script>
 
-<style></style>
+<style>
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 407px;
+  margin: 20px auto;
+}
+</style>
