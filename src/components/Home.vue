@@ -11,31 +11,19 @@
 </template>
 
 <script>
-import { onMounted, ref } from "vue";
+import { onMounted } from "vue";
 
 import PostList from "./PostList.vue";
+
+import fetchPosts from "../composables/Home/fetchPosts";
+import initState from "../composables/Home/initState";
 
 export default {
   name: "Home",
   components: { PostList },
   setup() {
-    const loading = ref(true);
-    const error = ref("");
-    const posts = ref([]);
-
-    const loadPosts = async () => {
-      try {
-        const res = await fetch("http://localhost:3000/posts");
-
-        if (res.status !== 200) {
-          throw Error("failed to retrieve posts");
-        }
-        posts.value = await res.json();
-        error.value = "";
-      } catch (err) {
-        error.value = err.message;
-      }
-    };
+    const { loading } = initState();
+    const { posts, error, loadPosts } = fetchPosts();
 
     onMounted(async () => {
       await loadPosts();
